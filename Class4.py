@@ -31,7 +31,6 @@ class Sistema():
         #La siguiente variable siempre dependera del tamaño de la lista, por lo cual no se podra modificar
         # con un método de asignar
         self.__numero_pacientes = len(self.__lista_pacientes)
-
     def ingresarPaciente(self,p):
         #Solicitar datos
 
@@ -64,7 +63,7 @@ def main():
         3. Datos Paciente
         4. Salir
         > """))
-        if menu == 1:
+        if (menu == 1):
             nombre = input("Ingrese el Nombre: ")
             cedula =int(input("Ingrese la Cédula: "))
             genero =input("Ingrese el Género: ")
@@ -77,11 +76,11 @@ def main():
             p.asignarGenero(genero)
             p.asignarServicio(servicio)
             mi_sistema.ingresarPaciente()
-        elif menu == 2:
+        elif (menu == 2):
             print("Número total de pacientes: " + str(mi_sistema.verNumeroPacientes()))
-        elif menu == 3:
+        elif (menu == 3):
             mi_sistema.verDatosPacientes()
-        elif menu == 4:
+        elif (menu == 4):
             break
         else: 
             print("Opción inválida")
