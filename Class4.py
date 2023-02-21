@@ -1,6 +1,5 @@
-class Paciente:
-
-    def __init___(self):
+class Paciente(): 
+    def __init__(self):  
         self.__nombre = ""
         self.__cedula = 0
         self.__genero = ""
@@ -8,69 +7,84 @@ class Paciente:
 
     def verNombre(self):
         return self.__nombre
-    def verServicio(self):
-        return self.__servicio
-    def verGenero(self):
-        return self.__genero
     def verCedula(self):
         return self.__cedula
-
+    def verGenero(self):
+        return self.__genero
+    def verServicio(self):
+        return self.__servicio 
+    
     def asignarNombre(self,n):
         self.__nombre = n
+    def asignarCedula(self,c):
+        self.__cedula = c
+    def asignarGenero(self,g):
+        self.__genero = g
     def asignarServicio(self,s):
         self.__servicio = s
     def asignarGenero(self,g):
         self.__genero = g
-    def asignarCedula(self,c):
-        self.__cedula = c
-
-class Sistema:
+class Sistema():
     def __init__(self):
+        # self.__lista_pacientes = {} #Manejar los pacientes en lista, objeto tipo diccionario
+        self.__lista_pacientes = [] #Manejar los pacientes en lista, objeto tipo lista.
+        #La siguiente variable siempre dependera del tamaño de la lista, por lo cual no se podra modificar
+        # con un método de asignar
+        self.__numero_pacientes = len(self.__lista_pacientes)
 
-        self.__lista_Pacientes= []
+    def ingresarPaciente(self,p):
+        #Solicitar datos
 
-        self.__numero_pacientes = len(self.__lista_Pacientes)
-    def ingresarPaciente(self):
-        nombre= input("Ingrese Nombre: ")
-        cedula= input("Ingrese ID: ")
-        genero= input("Ingrese Genero: ")
-        servicio= input("Ingrese Servicio: ")
+        #Guardar paciente en la lista
+        # self.__lista_pacientes[p.verCedula()]= p
+        self.__lista_pacientes.append(p)
 
-        p=Paciente()
-        p.asignarNombre(nombre)
-        p.asignarCedula(cedula)
-        p.asignarGenero(genero)
-        p.asignarServicio(servicio)
+        #Actualización la cantidad de pacientes en el sistema
+        self.__numero_pacientes = len(self.__lista_pacientes)
 
-        self.__lista_Pacientes.append(p)
-
-        self.__numero_pacientes = len(self.__lista_Pacientes)
-
-    def verNumeroPaciente(self): 
+    def verNumeroPacientes(self):
         return self.__numero_pacientes
-    def verDatosPaciente(self):
-        cedula= int(input("Ingrese ID paciente para buscar: "))
 
-        for paciente in self.__lista_Pacientes:
-            if cedula== paciente.verCedula():
+    def verDatosPacientes(self):
+        cedula = int(input("Ingrese la Cédula a buscar: "))
+        #Es for paciente y no cedula porque en la lista hay pacientes no numeros 
+        for paciente in self.__lista_pacientes: 
+            if cedula == paciente.verCedula():
+                print("Nombre: " + paciente.verNombre())
+                print("Cédula: " + str(paciente.verCedula()))
+                print("Género: " + paciente.verGenero())
+                print("Servicio: " + paciente.verServicio())
 
-                print("Nombre: " +paciente.verNombre())
-                print("Cedula: " +str(paciente.verCedula()))
-                print("Genero: " + paciente.verGenero())
-                print("Genero: " + paciente.verGenero())
+def main():
+    mi_sistema = Sistema()
 
-mi_sistema = Sistema()
+    while True:
+        menu = int(input("""1.Nuevo Paciente
+        2. Número de Pacientes
+        3. Datos Paciente
+        4. Salir
+        > """))
+        if menu == 1:
+            nombre = input("Ingrese el Nombre: ")
+            cedula =int(input("Ingrese la Cédula: "))
+            genero =input("Ingrese el Género: ")
+            servicio = input("Ingrese el Servicio: ")
 
-while True:
+            #Crear objeto Paciente y le asigno los datos
+            p = Paciente()
+            p.asignarNombre(nombre)
+            p.asignarCedula(cedula)
+            p.asignarGenero(genero)
+            p.asignarServicio(servicio)
+            mi_sistema.ingresarPaciente()
+        elif menu == 2:
+            print("Número total de pacientes: " + str(mi_sistema.verNumeroPacientes()))
+        elif menu == 3:
+            mi_sistema.verDatosPacientes()
+        elif menu == 4:
+            break
+        else: 
+            print("Opción inválida")
 
-    opcion = int(input(" 1. Nuevo paciente \n 2. Numero de pacientes \n 3. Datos Paciente \n 4. Salir"))
-    if opcion== 1:
-        mi_sistema.ingresarPaciente()
-    elif opcion==2:
-        print("Ahora hay:" + str(mi_sistema.verNumeroPaciente()))
-    elif opcion==3:
-        mi_sistema.verDatosPaciente()
-    elif opcion==4:
-        break
-    else:
-        print("Opcion invalida") 
+if __name__ == '__mian__':
+    main()
