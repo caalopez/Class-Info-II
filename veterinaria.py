@@ -38,6 +38,7 @@ class Mascota:
 class Sistema:
     def __init__(self) -> None:
         self.__lista_mascotas= []
+        self.__tipo={}
     
     def verificarExiste(self,historia):
         for m in self.__lista_mascotas:
@@ -51,7 +52,8 @@ class Sistema:
     
     def ingresarMascotas(self):
         self.__lista_mascotas.append(Mascota)
-
+        elf.__tipo[mascota.verHistoria()] = mascota
+        
     def VerFechaIngreso(self,historia):
         for masc in self.__lista_mascotas:
             if historia == masc.verHistoria():
@@ -74,8 +76,6 @@ class Sistema:
     def __init__(self) -> None:
         self.__lista_mascotas= []
         self.__numero_mascotas= len(self.__lista_mascotas)
-
-
 
 class Medicamento:
     def __init__(self) -> None:

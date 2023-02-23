@@ -26,15 +26,18 @@ class Paciente():
         self.__genero = g
 class Sistema():
     def __init__(self):
-        # self.__lista_pacientes = {} #Manejar los pacientes en lista, objeto tipo diccionario
         self.__lista_pacientes = [] #Manejar los pacientes en lista, objeto tipo lista.
-        #La siguiente variable siempre dependera del tamaño de la lista, por lo cual no se podra modificar
-        # con un método de asignar
-        self.__numero_pacientes = len(self.__lista_pacientes)
-    def ingresarPaciente(self,p):
-        #Solicitar datos
+    def verificarPaciente(self,cedula):
+        encontrado= False
 
-        #Guardar paciente en la lista
+        for p in self.__lista_pacientes:
+
+            if cedula==p.verCedula():
+                encontrado=True
+                break
+            return encontrado
+        #self.__numero_pacientes = len(self.__lista_pacientes)
+    def ingresarPaciente(self,p):
         # self.__lista_pacientes[p.verCedula()]= p
         self.__lista_pacientes.append(p)
 
@@ -58,23 +61,8 @@ def main():
     mi_sistema = Sistema()
 
     while True:
-        menu = int(input("""1.Nuevo Paciente
-        2. Número de Pacientes
-        3. Datos Paciente
-        4. Salir
-        > """))
+        menu = int(input( "1.Nuevo Paciente 2. Número de Pacientes 3. Datos Paciente 4. Salir "))
         if (menu == 1):
-            nombre = input("Ingrese el Nombre: ")
-            cedula =int(input("Ingrese la Cédula: "))
-            genero =input("Ingrese el Género: ")
-            servicio = input("Ingrese el Servicio: ")
-
-            #Crear objeto Paciente y le asigno los datos
-            p = Paciente()
-            p.asignarNombre(nombre)
-            p.asignarCedula(cedula)
-            p.asignarGenero(genero)
-            p.asignarServicio(servicio)
             mi_sistema.ingresarPaciente()
         elif (menu == 2):
             print("Número total de pacientes: " + str(mi_sistema.verNumeroPacientes()))
@@ -84,6 +72,5 @@ def main():
             break
         else: 
             print("Opción inválida")
-
 if __name__ == '__mian__':
     main()
